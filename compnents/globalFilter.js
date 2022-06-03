@@ -29,7 +29,7 @@ export function GlobalFilter({
       <Box m={15} mt="5%">
         <Stack>
           {" "}
-          <Flex>
+          <Flex w='908px' h='52px'>
             {" "}
             <InputGroup>
               <InputLeftElement
@@ -46,7 +46,7 @@ export function GlobalFilter({
                   onChange(e.target.value);
                 }}
                 // placeholder={`${count} resultado...`}
-                placeholder="Pesquisar"
+                placeholder="Pesquisar por nome ou CPF"
               />
             </InputGroup>
           </Flex>

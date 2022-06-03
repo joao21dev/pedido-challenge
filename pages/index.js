@@ -11,6 +11,7 @@ import {
   chakra,
   Flex,
   Box,
+  Text,
 } from "@chakra-ui/react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import React, { useEffect, useMemo, useState } from "react";
@@ -44,8 +45,16 @@ export default function Home() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Nome Completo",
+        Header: "Nome COmpleto",
         accessor: "name",
+        Cell: (props) => (
+          <Box borderRadius={15} w='70px' bg={props.cell.row.cells[4].value === 'active' ? '#B5F1DD' : '#EAEFED'}>
+            <Text color={"#34423D"} textAlign="center">
+            {props.cell.row.cells[4].value === 'active' ? 'Ativo' : 'Inativo' }
+            </Text>
+          </Box>
+          // props.cell.row.cells[4].value
+        ),
       },
       {
         Header: "Departamento",
@@ -59,11 +68,21 @@ export default function Home() {
       {
         Header: "Unidadde",
         accessor: "branch",
-      },{
+      },
+      {
         Header: "Status",
         accessor: "status",
-      }
+        Cell: (props) => (
+          <Box borderRadius={15} w='70px' bg={props.cell.row.cells[4].value === 'active' ? '#B5F1DD' : '#EAEFED'}>
+            <Text color={"#34423D"} textAlign="center">
+            {props.cell.row.cells[4].value === 'active' ? 'Ativo' : 'Inativo' }
+            </Text>
+          </Box>
+          // props.cell.row.cells[4].value
+        ),
+      },
     ],
+
     []
   );
 
@@ -96,7 +115,7 @@ export default function Home() {
           justifyContent="center"
           alignItems="center"
           m={4}
-          w="150vw"
+          w="908px"
         >
           <Table {...getTableProps()}>
             <Thead>
@@ -121,7 +140,7 @@ export default function Home() {
               {firstPageRows.map((row, idx) => {
                 prepareRow(row);
                 return (
-                  <Tr {...row.getRowProps()} bg={isEven(idx) ? "#C1F2E0" : ""}>
+                  <Tr {...row.getRowProps()} >
                     {row.cells.map((cell, idx) => {
                       return (
                         <Td
