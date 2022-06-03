@@ -12,6 +12,8 @@ import {
   Flex,
   Box,
   Text,
+  Avatar,
+  Center,
 } from "@chakra-ui/react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import React, { useEffect, useMemo, useState } from "react";
@@ -45,14 +47,16 @@ export default function Home() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Nome COmpleto",
+        Header: "Nome Completo",
         accessor: "name",
         Cell: (props) => (
-          <Box borderRadius={15} w='70px' bg={props.cell.row.cells[4].value === 'active' ? '#B5F1DD' : '#EAEFED'}>
-            <Text color={"#34423D"} textAlign="center">
-            {props.cell.row.cells[4].value === 'active' ? 'Ativo' : 'Inativo' }
-            </Text>
-          </Box>
+          <Flex>
+            <Center>
+              <Avatar size={"sm"} src={props.row.original.image} />
+              <Text ml={2}>{props.cell.row.cells[0].value}</Text>
+            </Center>
+          </Flex>
+
           // props.cell.row.cells[4].value
         ),
       },
@@ -73,9 +77,15 @@ export default function Home() {
         Header: "Status",
         accessor: "status",
         Cell: (props) => (
-          <Box borderRadius={15} w='70px' bg={props.cell.row.cells[4].value === 'active' ? '#B5F1DD' : '#EAEFED'}>
+          <Box
+            borderRadius={15}
+            w="70px"
+            bg={
+              props.cell.row.cells[4].value === "active" ? "#B5F1DD" : "#EAEFED"
+            }
+          >
             <Text color={"#34423D"} textAlign="center">
-            {props.cell.row.cells[4].value === 'active' ? 'Ativo' : 'Inativo' }
+              {props.cell.row.cells[4].value === "active" ? "Ativo" : "Inativo"}
             </Text>
           </Box>
           // props.cell.row.cells[4].value
@@ -108,6 +118,9 @@ export default function Home() {
         setGlobalFilter={setGlobalFilter}
         globalFilter={state.globalFilter}
       />
+
+<Text>Listagem de Colaboradores</Text>
+
       <Flex>
         <Box
           bg="white"
@@ -140,7 +153,7 @@ export default function Home() {
               {firstPageRows.map((row, idx) => {
                 prepareRow(row);
                 return (
-                  <Tr {...row.getRowProps()} >
+                  <Tr {...row.getRowProps()}>
                     {row.cells.map((cell, idx) => {
                       return (
                         <Td
